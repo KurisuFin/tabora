@@ -1,0 +1,19 @@
+language: ruby
+
+rvm:
+- 2.0.0
+
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: GKNbPeoQtKUTMX/7tRRIytj4SWGtVxT6yGunWKnQNBJBe/4+ur6Kez+MWU1vB6+jOF8e+dNsomnhG82xRaDn5D8+Tqhy0aPyeqpItZEOmMJgPRK1+7IRlEh0qpwLlYSqtwlEukeOdq/RxToOMmoPcREKQPoNc1BBgHidm8ral+8=
+  app: tabora
+  on:
+    repo: KurisuFin/tabora
+  run: "rake db:migrate"
