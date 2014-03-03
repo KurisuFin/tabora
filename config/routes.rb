@@ -1,5 +1,7 @@
 Tabora::Application.routes.draw do
 
+  resources :events
+
   resources :events, only: [:index, :show, :new, :create, :edit, :update]
 
 
