@@ -15,7 +15,7 @@ describe Event do
 		expect(Event.count).to eq(0)
 	end
 
-	it 'has to have unique name' do
+	it 'has to have unique name to be saved' do
 		Event.create name:'Happening'
 		event = Event.create name:'Happening'
 
