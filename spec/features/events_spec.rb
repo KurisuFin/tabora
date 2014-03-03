@@ -48,4 +48,31 @@ describe 'Event' do
 		expect(Event.count).to eq(2)
 		expect(page).to have_content 'Name has already been taken'
 	end
+
+	#Edit
+	it 'can be edited and is updated with valid name' do
+		visit event_path(event1)
+		click_link 'Edit'
+		fill_in 'event_name', with:'New name'
+		click_button 'Update Event'
+
+		expect(page).to have_content 'New name'
+		expect(page).not_to have_content 'Happening'
+	end
+
+	it 'is not updated without name' do
+		visit edit_event_path(event1)
+		fill_in 'event_name', with: ''
+		click_button 'Update Event'
+
+		expect(page).to have_content 'Name can\'t be blank'
+	end
+
+	it 'is not updated if name is taken' do
+		visit edit_event_path(event1)
+		fill_in 'event_name', with: 'Another'
+		click_button 'Update Event'
+
+		expect(page).to have_content 'Name has already been taken'
+	end
 end
