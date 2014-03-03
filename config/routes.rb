@@ -1,6 +1,6 @@
 Tabora::Application.routes.draw do
 
-  resources :events, only: [:index]
+  resources :events, only: [:index, :show]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
