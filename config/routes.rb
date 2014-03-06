@@ -1,4 +1,7 @@
 Tabora::Application.routes.draw do
+  resources :users
+	resources :sessions, only: [:new, :create]
+
   resources :games
 
   resources :events do
@@ -7,6 +10,11 @@ Tabora::Application.routes.draw do
 
 	resources :tournaments, only: [:index, :show, :edit, :update, :destroy]
 
+	get 'login', to: 'sessions#new'
+	delete 'logout', to: 'sessions#destroy'
+	get 'signup', to: 'users#new'
+
+	root 'events#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
