@@ -21,6 +21,7 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/1/edit
   def edit
+		@games = Game.all
   end
 
   # POST /tournaments
