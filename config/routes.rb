@@ -1,8 +1,11 @@
 Tabora::Application.routes.draw do
+  resources :games
 
-  resources :events
+  resources :events do
+		resources :tournaments, only: [:new, :create]
+	end
 
-  resources :events, only: [:index, :show, :new, :create, :edit, :update]
+	resources :tournaments, only: [:index, :show, :edit, :update, :destroy]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
