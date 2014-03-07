@@ -10,6 +10,12 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
+		if current_user.is_participating_of @tournament
+			@participation = Participation.find_by user: current_user, tournament: @tournament
+		else
+			@participation = Participation.new
+			@participation.tournament = @tournament
+		end
   end
 
   # GET /tournaments/new

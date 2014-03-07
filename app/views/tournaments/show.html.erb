@@ -12,5 +12,35 @@
   <%= @tournament.game.name %>
 </p>
 
+<table>
+	<thead>
+		<tr>
+			<th>Participants</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @tournament.participants.each do |participant| %>
+			<tr>
+				<td><%= participant.username %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<div>
+	<% if current_user %>
+		<% if current_user.is_participating_of(@tournament) %>
+			<%= form_for(@participation, method: :delete) do %>
+				<%= submit_tag 'Leave' %>
+			<% end %>
+		<% else %>
+			<%= form_for(@participation) do |f| %>
+				<%= f.hidden_field :tournament_id %>
+				<%= f.submit value:'Join' %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>
