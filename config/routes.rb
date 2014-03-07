@@ -1,4 +1,6 @@
 Tabora::Application.routes.draw do
+  resources :participations
+
   resources :users
 	resources :sessions, only: [:new, :create]
 
