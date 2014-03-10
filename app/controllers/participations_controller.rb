@@ -15,6 +15,8 @@ class ParticipationsController < ApplicationController
   # GET /participations/new
   def new
     @participation = Participation.new
+		@users = User.all
+		@tournaments = Tournament.all
   end
 
   # GET /participations/1/edit

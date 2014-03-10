@@ -4,8 +4,4 @@ module OwnTestHelper
 		fill_in 'username', with:credentials[:username]
 		click_button 'Login'
 	end
-
-	def p
-		save_and_open_page
-	end
 end
