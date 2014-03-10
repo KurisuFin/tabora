@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
 	validates :username,
 						uniqueness: true,
-						length: { minimum: 3, maximum: 16 }
+						length: { minimum: 3 }
 
 	#TODO Password things
 	def self.authenticate(username)

@@ -15,13 +15,6 @@ describe User do
 		expect(User.count).to eq(0)
 	end
 
-	it 'is not saved if username is too long' do
-		user = User.create username:'12345678901234567'
-
-		expect(user).not_to be_valid
-		expect(User.count).to eq(0)
-	end
-
 	it 'is not saved if username is already taken' do
 		user1 = User.create username:'Jack'
 		user2 = User.create username:'Jack'

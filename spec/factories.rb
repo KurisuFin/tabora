@@ -1,14 +1,16 @@
 FactoryGirl.define do
+	uuid = UUID.new
+
 	factory :user do
-		username 'Jack'
+		username { uuid.generate }
 	end
 
 	factory :event do
-		name 'Happening'
+		name { uuid.generate }
 	end
 
 	factory :game do
-		name 'The Game'
+		name { uuid.generate }
 	end
 
 	factory :tournament do
