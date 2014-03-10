@@ -34,8 +34,9 @@ describe Participation do
 	it 'can be created only once for one user to one tournament' do
 		participation1 = Participation.create user:user, tournament:tournament
 		participation2 = Participation.create user:user, tournament:tournament
-
+		
 		expect(participation1).to eq(Participation.first)
+		expect(participation2.errors.to_a[0]).to eq('User can join tournament only once')
 		expect(Participation.count).to eq(1)
 	end
 

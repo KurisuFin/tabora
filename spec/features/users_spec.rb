@@ -41,6 +41,14 @@ describe 'User' do
 			expect(page).to have_content 'Jack'
 			expect(page).to have_content 'Logout'
 		end
+
+		it 'cannot login with unexisting username' do
+			visit login_path
+			fill_in 'username', with:'BobTheBuilder'
+			click_button 'Login'
+
+			expect(page).to have_content 'No such user'
+		end
 	end
 
 
