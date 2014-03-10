@@ -1,0 +1,14 @@
+ApplicationController
+Event
+EventsController
+Game
+GamesController
+Operator
+OperatorsController
+Participation
+ParticipationsController
+SessionsController
+Tournament
+TournamentsController
+User
+UsersController

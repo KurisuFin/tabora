@@ -5,6 +5,7 @@ class Tournament < ActiveRecord::Base
 	has_many :participants, through: :participations, source: :user
 
 	validates :game, presence: true
+	validates :event, presence: true
 
 	# Returns name of tournament. If no name is given returns name of game.
 	def name
