@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Tournament do
-	let!(:event) { FactoryGirl.create(:event) }
-	let!(:game) { FactoryGirl.create(:game) }
+	let!(:event) { FactoryGirl.create :event }
+	let!(:game) { FactoryGirl.create :game }
 
 	it 'is saved with event and game' do
 		tournament = Tournament.create event:event, game:game

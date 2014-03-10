@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Event' do
-	let!(:event1) { FactoryGirl.create(:event, name:'Happening') }
-	let!(:event2) { FactoryGirl.create(:event, name:'Another') }
+	let!(:event1) { FactoryGirl.create :event, name:'Happening' }
+	let!(:event2) { FactoryGirl.create :event, name:'Another' }
 
 
 	# INDEX

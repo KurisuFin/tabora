@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Event do
-	it 'is saved with name' do
+	it 'is saved with proper name' do
 		event = Event.create name:'Happening'
 
 		expect(event).to be_valid
@@ -15,7 +15,7 @@ describe Event do
 		expect(Event.count).to eq(0)
 	end
 
-	it 'has to have unique name to be saved' do
+	it 'is not saved if name is already taken' do
 		Event.create name:'Happening'
 		event = Event.create name:'Happening'
 

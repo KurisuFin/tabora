@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe 'Tournament' do
-	let!(:event1) { FactoryGirl.create(:event, name:'Happening') }
-	let!(:event2) { FactoryGirl.create(:event, name:'Another') }
-	let!(:game1) { FactoryGirl.create(:game, name:'The Game') }
-	let!(:game2) { FactoryGirl.create(:game, name:'The Peli') }
-	let!(:tournament1) { FactoryGirl.create(:tournament, event:event1, game:game1) }
-	let!(:tournament2) { FactoryGirl.create(:tournament, event:event1, game:game2) }
-	let!(:tournament3) { FactoryGirl.create(:tournament, name:'Nintendo Challenge', event:event2, game:game2) }
+	let!(:event1) { FactoryGirl.create :event, name:'Happening' }
+	let!(:event2) { FactoryGirl.create :event, name:'Another' }
+	let!(:game1) { FactoryGirl.create :game, name:'The Game' }
+	let!(:game2) { FactoryGirl.create :game, name:'The Peli' }
+	let!(:tournament1) { FactoryGirl.create :tournament, event:event1, game:game1 }
+	let!(:tournament2) { FactoryGirl.create :tournament, event:event1, game:game2 }
+	let!(:tournament3) { FactoryGirl.create :tournament, name:'Nintendo Challenge', event:event2, game:game2 }
 
 	# INDEX
 	it 'is listed on index page' do
