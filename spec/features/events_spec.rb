@@ -13,29 +13,21 @@ describe 'Event' do
 		expect(page).to have_content('Another')
 	end
 
-	it 'is listed on index page with another event' do
-		visit events_path
-
-		expect(page).to have_content('Happening')
-		expect(page).to have_content('Another')
-	end
-
 
 	# SHOW
 	it 'has own page with title' do
 		visit event_path(event1)
 
 		expect(page).to have_content 'Happening'
-		expect(page).to have_content 'Create new tournament'
+		expect(page).not_to have_content 'Another'
 	end
 
 	it 'can be visited from index page' do
 		visit events_path
-		click_link 'Another'
+		click_link 'Happening'
 
-		expect(page).to have_content('Another')
-		expect(page).to have_content 'Create new tournament'
-		expect(page).not_to have_content('Happening')
+		expect(page).to have_content('Happening')
+		expect(page).not_to have_content('Another')
 	end
 
 
@@ -51,7 +43,6 @@ describe 'Event' do
 
 	it 'is not saved without name' do
 		visit new_event_path
-
 		click_button 'Create Event'
 
 		expect(Event.count).to eq(2)
@@ -93,9 +84,4 @@ describe 'Event' do
 
 		expect(page).to have_content 'Name has already been taken'
 	end
-
-
-	# DESTROY
-	it 'can be deleted if current user is admin'
-	it 'cannot be deleted if current user is not admin'
 end

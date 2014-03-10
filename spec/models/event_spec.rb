@@ -16,10 +16,10 @@ describe Event do
 	end
 
 	it 'is not saved if name is already taken' do
-		Event.create name:'Happening'
-		event = Event.create name:'Happening'
+		event1 = Event.create name:'Happening'
+		event2 = Event.create name:'Happening'
 
-		expect(event).not_to be_valid
+		expect(event2).not_to be_valid
 		expect(Event.count).to eq(1)
 	end
 

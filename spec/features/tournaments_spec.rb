@@ -79,11 +79,4 @@ describe 'Tournament' do
 		expect(page).to have_content 'The Game'
 		expect(page).not_to have_content 'The Peli'
 	end
-
-
-	# DESTROY
-	it 'can be deleted if current user is admin'
-	it 'can be deleted if current user is operator of specific event'
-	it 'cannot be deleted if current user is not operator of specific event'
-	it 'cannot be deleted if current user is not admin or operator'
 end
