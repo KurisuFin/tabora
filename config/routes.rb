@@ -1,4 +1,6 @@
 Tabora::Application.routes.draw do
+  resources :operators
+
   resources :participations
 
   resources :users

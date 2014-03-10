@@ -10,11 +10,13 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
-		if current_user.is_participating_of @tournament
-			@participation = Participation.find_by user: current_user, tournament: @tournament
-		else
-			@participation = Participation.new
-			@participation.tournament = @tournament
+		if current_user
+			if current_user.is_participating_of @tournament
+				@participation = Participation.find_by user: current_user, tournament: @tournament
+			else
+				@participation = Participation.new
+				@participation.tournament = @tournament
+			end
 		end
   end
 
@@ -40,7 +42,9 @@ class TournamentsController < ApplicationController
       if @tournament.save
         format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tournament }
-      else
+			else
+				@event = Event.find(params[:event_id])
+				@games = Game.all
         format.html { render action: 'new' }
         format.json { render json: @tournament.errors, status: :unprocessable_entity }
       end
