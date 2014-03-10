@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @operator.user_id %>
+  <%= @operator.user.username %>
 </p>
 
 <p>
   <strong>Event:</strong>
-  <%= @operator.event_id %>
+  <%= @operator.event.name %>
 </p>
 
 <%= link_to 'Edit', edit_operator_path(@operator) %> |

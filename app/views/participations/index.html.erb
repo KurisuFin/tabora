@@ -14,8 +14,8 @@
   <tbody>
     <% @participations.each do |participation| %>
       <tr>
-        <td><%= participation.user_id %></td>
-        <td><%= participation.tournament_id %></td>
+        <td><%= participation.user.username %></td>
+        <td><%= participation.tournament.name %></td>
         <td><%= link_to 'Show', participation %></td>
         <td><%= link_to 'Edit', edit_participation_path(participation) %></td>
         <td><%= link_to 'Destroy', participation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

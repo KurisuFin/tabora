@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @participation.user_id %>
+  <%= @participation.user.username %>
 </p>
 
 <p>
   <strong>Tournament:</strong>
-  <%= @participation.tournament_id %>
+  <%= @participation.tournament.name %>
 </p>
 
 <%= link_to 'Edit', edit_participation_path(@participation) %> |

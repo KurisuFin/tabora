@@ -19,5 +19,7 @@
 
 <p><%= link_to 'Create new tournament', new_event_tournament_path(event_id: @event.id) %></p>
 
+<p><strong><%= current_user.is_operator_of @event %></strong></p>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
