@@ -61,4 +61,20 @@ describe Operator do
 			operator.delete
 		}.to change{Operator.count}.from(1).to(0)
 	end
+
+	it 'is destroyed if associated user is destroyed' do
+		Operator.create user:user, event:event
+
+		expect {
+			user.destroy
+		}.to change{Operator.count}.from(1).to(0)
+	end
+
+	it 'is destroyed if associated event is destroyed' do
+		Operator.create user:user, event:event
+
+		expect {
+			event.destroy
+		}.to change{Operator.count}.from(1).to(0)
+	end
 end

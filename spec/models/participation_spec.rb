@@ -61,4 +61,20 @@ describe Participation do
 			participation.delete
 		}.to change{Participation.count}.from(1).to(0)
 	end
+
+	it 'is destroyed if associated user is destroyed' do
+		Participation.create user:user, tournament:tournament
+
+		expect {
+			user.destroy
+		}.to change{Participation.count}.from(1).to(0)
+	end
+
+	it 'is destroyed if associated tournament is destroyed' do
+		Participation.create user:user, tournament:tournament
+
+		expect {
+			tournament.destroy
+		}.to change{Participation.count}.from(1).to(0)
+	end
 end

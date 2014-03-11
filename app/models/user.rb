@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-	has_many :operators
+	has_many :operators, dependent: :destroy
 	has_many :operated_events, through: :operators, source: :events
-	has_many :participations
+	has_many :participations, dependent: :destroy
 	has_many :tournaments, through: :participations
 
 	validates :username,
