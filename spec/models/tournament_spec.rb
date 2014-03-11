@@ -44,4 +44,12 @@ describe Tournament do
 			tournament.delete
 		}.to change{Tournament.count}.from(1).to(0)
 	end
+
+	it 'is destroyed if associated event is destroyed' do
+		tournament = Tournament.create event:event, game:game
+
+		expect {
+			event.destroy
+		}.to change{Tournament.count}.from(1).to(0)
+	end
 end
