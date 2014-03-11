@@ -32,7 +32,9 @@ class OperatorsController < ApplicationController
       if @operator.save
         format.html { redirect_to @operator, notice: 'Operator was successfully created.' }
         format.json { render action: 'show', status: :created, location: @operator }
-      else
+			else
+				@users = User.all
+				@events = Event.all
         format.html { render action: 'new' }
         format.json { render json: @operator.errors, status: :unprocessable_entity }
       end
