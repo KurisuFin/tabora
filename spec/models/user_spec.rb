@@ -30,4 +30,31 @@ describe User do
 			user.delete
 		}.to change{User.count}.from(1).to(0)
 	end
+
+	describe 'method' do
+		let!(:user) { FactoryGirl.create :user }
+		let!(:event) { FactoryGirl.create :event}
+		let!(:tournament) { FactoryGirl.create :tournament, event:event }
+
+		it 'is_operator_of(event) returns true if user is operator of event' do
+			FactoryGirl.create :operator, user:user, event:event
+
+			expect(user.is_operator_of event).to be(true)
+		end
+
+		it 'is_operator_of(event) returns false if user in not operator of event' do
+			expect(user.is_operator_of event).to be(false)
+		end
+
+		it 'is_participating_of(tournament) returns true if user is participant of tournament' do
+			FactoryGirl.create :participation, user:user, tournament:tournament
+
+			expect(user.is_participant_of tournament).to be(true)
+		end
+
+		it 'is_participating_of(tournament) returns false if user is not participant of tournament' do
+			expect(user.is_participant_of tournament).to be(false)
+		end
+
+	end
 end

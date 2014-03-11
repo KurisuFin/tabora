@@ -29,7 +29,7 @@
 
 <div>
 	<% if current_user %>
-		<% if current_user.is_participating_of(@tournament) %>
+		<% if current_user.is_participant_of(@tournament) %>
 			<%= form_for(@participation, method: :delete) do %>
 				<%= submit_tag 'Leave' %>
 			<% end %>

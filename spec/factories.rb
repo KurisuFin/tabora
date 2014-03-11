@@ -18,6 +18,11 @@ FactoryGirl.define do
 		game
 	end
 
+	factory :operator do
+		user
+		event
+	end
+
 	factory :participation do
 		user
 		tournament

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 		User.find_by username:username
 	end
 
-	def is_participating_of(tournament)
+	def is_participant_of(tournament)
 		Tournament.find(tournament).participants.exists? self
 	end
 

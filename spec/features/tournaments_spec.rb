@@ -27,6 +27,12 @@ describe 'Tournament' do
 		expect(page).not_to have_content('The Game')
 	end
 
+	it 'has name of game if name for tournament is not given' do
+		visit tournament_path(tournament1)
+
+		expect(page).to have_content 'The Game'
+	end
+
 	it 'can be visited from index page' do
 		visit tournaments_path
 		click_link 'Nintendo Challenge'
