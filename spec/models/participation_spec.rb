@@ -7,19 +7,21 @@ describe Participation do
 	it 'is saved with user and tournament' do
 		participation = Participation.create user:user, tournament:tournament
 
-		expect(participation).to eq(Participation.first)
+		expect(participation).to be_valid
 		expect(Participation.count).to eq(1)
 	end
 
 	it 'is not saved without user' do
-		Participation.create tournament:tournament
+		participation = Participation.create tournament:tournament
 
+		expect(participation).not_to be_valid
 		expect(Participation.count).to eq(0)
 	end
 
 	it 'is not saved without tournament' do
-		Participation.create user:user
+		participation = Participation.create user:user, tournament:nil
 
+		expect(participation).not_to be_valid
 		expect(Participation.count).to eq(0)
 	end
 
@@ -34,9 +36,8 @@ describe Participation do
 	it 'can be created only once for one user to one tournament' do
 		participation1 = Participation.create user:user, tournament:tournament
 		participation2 = Participation.create user:user, tournament:tournament
-		
-		expect(participation1).to eq(Participation.first)
-		expect(participation2.errors.to_a[0]).to eq('User can join tournament only once')
+
+		expect(participation1).to  be_valid
 		expect(Participation.count).to eq(1)
 	end
 
@@ -45,8 +46,8 @@ describe Participation do
 		participation1 = Participation.create user:user, tournament:tournament
 		participation2 = Participation.create user:user, tournament:another_tournament
 
-		expect(participation1).to eq(Participation.first)
-		expect(participation2).to eq(Participation.last)
+		expect(participation1).to be_valid
+		expect(participation2).to be_valid
 		expect(Participation.count).to eq(2)
 	end
 
@@ -55,8 +56,8 @@ describe Participation do
 		participation1 = Participation.create user:user, tournament:tournament
 		participation2 = Participation.create user:another_user, tournament:tournament
 
-		expect(participation1).to eq(Participation.first)
-		expect(participation2).to eq(Participation.last)
+		expect(participation1).to be_valid
+		expect(participation2).to be_valid
 		expect(Participation.count).to eq(2)
 	end
 end
