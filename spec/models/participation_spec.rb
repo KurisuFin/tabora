@@ -19,18 +19,10 @@ describe Participation do
 	end
 
 	it 'is not saved without tournament' do
-		participation = Participation.create user:user, tournament:nil
+		participation = Participation.create user:user
 
 		expect(participation).not_to be_valid
 		expect(Participation.count).to eq(0)
-	end
-
-	it 'can be deleted' do
-		participation = Participation.create user:user, tournament:tournament
-
-		expect {
-			participation.delete
-		}.to change{Participation.count}.from(1).to(0)
 	end
 
 	it 'can be created only once for one user to one tournament' do
@@ -38,6 +30,7 @@ describe Participation do
 		participation2 = Participation.create user:user, tournament:tournament
 
 		expect(participation1).to  be_valid
+		expect(participation2).not_to  be_valid
 		expect(Participation.count).to eq(1)
 	end
 
@@ -59,5 +52,13 @@ describe Participation do
 		expect(participation1).to be_valid
 		expect(participation2).to be_valid
 		expect(Participation.count).to eq(2)
+	end
+
+	it 'can be deleted' do
+		participation = Participation.create user:user, tournament:tournament
+
+		expect {
+			participation.delete
+		}.to change{Participation.count}.from(1).to(0)
 	end
 end
