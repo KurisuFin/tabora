@@ -2,5 +2,10 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+<% if current_user %>
+	<% if current_user.is_admin? %>
+		<p><%= link_to 'Destroy event', @event, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	<% end %>
+<% end %>
+
+<%= link_to 'Cancel', @event %>

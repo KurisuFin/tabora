@@ -6,8 +6,6 @@
       <th>Name</th>
       <th>Event</th>
       <th>Game</th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -17,8 +15,6 @@
         <td><%= link_to tournament.name, tournament %></td>
         <td><%= link_to tournament.event.name, tournament.event %></td>
         <td><%= link_to tournament.game.name, tournament.game %></td>
-        <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
-        <td><%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

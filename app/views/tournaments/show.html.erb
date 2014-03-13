@@ -42,5 +42,8 @@
 	<% end %>
 </div>
 
-<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
-<%= link_to 'Back', tournaments_path %>
+<% if current_user %>
+	<% if current_user.is_operator_of @tournament.event %>
+		<%= link_to 'Edit', edit_tournament_path(@tournament) %>
+	<% end %>
+<% end %>

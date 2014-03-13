@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+	before_action :ensure_that_admin, except: [:index, :show, :edit, :update]
+	before_action :ensure_that_operator, only: [:edit, :update]
 
   # GET /events
   # GET /events.json
@@ -70,5 +72,11 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:name)
-    end
+		end
+
+		def ensure_that_operator
+			raise_forbidden if current_user.nil?
+			event = Event.find params[:id]
+			raise_forbidden unless current_user.is_operator_of event
+		end
 end

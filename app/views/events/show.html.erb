@@ -17,13 +17,10 @@
 	</tbody>
 </table>
 
-<p><%= link_to 'Create new tournament', new_event_tournament_path(event_id: @event.id) %></p>
 
 <% if current_user %>
-	<p>
-		<strong><%= current_user.is_operator_of @event %></strong>
-	</p>
+	<% if current_user.is_operator_of @event %>
+		<p><%= link_to 'Create new tournament', new_event_tournament_path(event_id: @event.id) %></p>
+		<p><%= link_to 'Edit', edit_event_path(@event) %></p>
+	<% end %>
 <% end %>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>

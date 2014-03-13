@@ -5,20 +5,14 @@
     <tr>
       <th>User</th>
       <th>Event</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @operators.each do |operator| %>
       <tr>
-        <td><%= operator.user.username %></td>
-        <td><%= operator.event.name %></td>
-        <td><%= link_to 'Show', operator %></td>
-        <td><%= link_to 'Edit', edit_operator_path(operator) %></td>
-        <td><%= link_to 'Destroy', operator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to operator.user.username, operator.user %></td>
+        <td><%= link_to operator.event.name, operator.event %></td>
       </tr>
     <% end %>
   </tbody>

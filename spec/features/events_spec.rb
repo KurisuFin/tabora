@@ -1,4 +1,5 @@
 require 'spec_helper'
+include OwnTestHelper
 
 describe 'Event' do
 	let!(:event1) { FactoryGirl.create :event, name:'Happening' }
@@ -32,56 +33,35 @@ describe 'Event' do
 
 
 	# NEW
-	it 'is saved with valid name' do
-		visit new_event_path
-		fill_in 'event_name', with:'Newbie event'
+	it 'cannot be created if no user is logged in' do
+		expect {
+			visit new_event_path
+		}.to raise_error ActionController::RoutingError
+	end
+
+	it 'cannot be created if logged user is not operator of event' do
+		user = FactoryGirl.create :user
+		login(username:user.username)
 
 		expect {
-			click_button 'Create Event'
-		}.to change{Event.count}.from(2).to(3)
-	end
-
-	it 'is not saved without name' do
-		visit new_event_path
-		click_button 'Create Event'
-
-		expect(Event.count).to eq(2)
-		expect(page).to have_content 'Name can\'t be blank'
-	end
-
-	it 'is not saved if name is taken' do
-		visit new_event_path
-		fill_in 'event_name', with:'Happening'
-		click_button 'Create Event'
-
-		expect(Event.count).to eq(2)
-		expect(page).to have_content 'Name has already been taken'
+			visit new_event_path
+		}.to raise_error ActionController::RoutingError
 	end
 
 
 	# EDIT
-	it 'can be edited and is updated with valid name' do
-		visit edit_event_path(event1)
-		fill_in 'event_name', with:'New name'
-		click_button 'Update Event'
-
-		expect(page).to have_content 'New name'
-		expect(page).not_to have_content 'Happening'
+	it 'cannot be edited if no user is logged in' do
+		expect {
+			visit edit_event_path(event1)
+		}.to raise_error ActionController::RoutingError
 	end
 
-	it 'is not updated without name' do
-		visit edit_event_path(event1)
-		fill_in 'event_name', with: ''
-		click_button 'Update Event'
+	it 'cannot be edited if logged user is not operator of event' do
+		user = FactoryGirl.create :user
+		login(username:user.username)
 
-		expect(page).to have_content 'Name can\'t be blank'
-	end
-
-	it 'is not updated if name is taken' do
-		visit edit_event_path(event1)
-		fill_in 'event_name', with: 'Another'
-		click_button 'Update Event'
-
-		expect(page).to have_content 'Name has already been taken'
+		expect {
+			visit edit_event_path(event1)
+		}.to raise_error ActionController::RoutingError
 	end
 end

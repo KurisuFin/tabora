@@ -4,6 +4,6 @@
 	<%= render 'form_insides', f: f %>
 <% end %>
 
+<p><%= link_to 'Destroy tournament', @tournament, method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
-<%= link_to 'Show', @tournament %> |
-<%= link_to 'Back', tournaments_path %>
+<%= link_to 'Cancel', @tournament %>

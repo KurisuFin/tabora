@@ -8,4 +8,13 @@ class ApplicationController < ActionController::Base
 	def current_user
 		User.find_by_id(session[:user_id])
 	end
+
+	def ensure_that_admin
+		raise_forbidden if current_user.nil?
+		raise_forbidden unless current_user.is_admin?
+	end
+
+	def raise_forbidden
+		raise ActionController::RoutingError.new('Forbidden')
+	end
 end

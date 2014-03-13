@@ -5,20 +5,14 @@
     <tr>
       <th>User</th>
       <th>Tournament</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @participations.each do |participation| %>
       <tr>
-        <td><%= participation.user.username %></td>
-        <td><%= participation.tournament.name %></td>
-        <td><%= link_to 'Show', participation %></td>
-        <td><%= link_to 'Edit', edit_participation_path(participation) %></td>
-        <td><%= link_to 'Destroy', participation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to participation.user.username, participation.user %></td>
+        <td><%= link_to participation.tournament.name, participation.tournament %></td>
       </tr>
     <% end %>
   </tbody>

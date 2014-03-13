@@ -1,5 +1,6 @@
 class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :destroy]
+	before_action :ensure_that_operator, except: [:index, :show]
 
   # GET /tournaments
   # GET /tournaments.json
@@ -84,5 +85,12 @@ class TournamentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
       params.require(:tournament).permit(:name, :event_id, :game_id)
-    end
+		end
+
+		def ensure_that_operator
+			raise_forbidden if current_user.nil?
+			event_id = params[:event_id] || @tournament.event_id
+			event = Event.find(event_id)
+			raise_forbidden unless current_user.is_operator_of event
+		end
 end
