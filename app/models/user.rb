@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
 		User.find_by username:username
 	end
 
+	def is(user)
+		self == user
+	end
+
 	def is_admin?
 		self.admin
 	end
@@ -20,7 +24,6 @@ class User < ActiveRecord::Base
 	def is_participant_of(tournament)
 		Tournament.find(tournament).participants.exists? self
 	end
-
 
 	def is_operator_of(event)
 		# Admin is automatically operator of all events

@@ -1,0 +1,9 @@
+<%= link_to 'New tournament', new_event_tournament_path(event_id: @event.id) %>
+<%= link_to 'Add operator', new_event_operator_path(event_id: @event.id) %>
+<%= link_to 'Edit', edit_event_path(@event) %>
+<p>
+	<strong>Operators:</strong>
+	<% @event.operating_users.each do |operator| %>
+		<%= operator.username %>
+	<% end %>
+</p>

@@ -1,11 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<p><%= @tournament.event.name %></p>
 <h1><%= @tournament.name %></h1>
-
-<p>
-  <strong>Event:</strong>
-  <%= @tournament.event.name %>
-</p>
 
 <p>
   <strong>Game:</strong>
@@ -44,6 +40,8 @@
 
 <% if current_user %>
 	<% if current_user.is_operator_of @tournament.event %>
-		<%= link_to 'Edit', edit_tournament_path(@tournament) %>
+		<div id="controls">
+			<%= render 'controls' %>
+		</div>
 	<% end %>
 <% end %>

@@ -19,6 +19,6 @@
 <br>
 <% if current_user %>
 	<% if current_user.is_admin? %>
-		<%= link_to 'New Event', new_event_path %>
+		<div id="controls"><%= link_to 'New Event', new_event_path %></div>
 	<% end %>
 <% end %>

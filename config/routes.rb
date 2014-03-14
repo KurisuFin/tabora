@@ -1,6 +1,4 @@
 Tabora::Application.routes.draw do
-  resources :operators
-
   resources :participations
 
   resources :users
@@ -10,9 +8,11 @@ Tabora::Application.routes.draw do
 
   resources :events do
 		resources :tournaments, only: [:new, :create]
+		resources :operators, only: [:new, :create]
 	end
 
 	resources :tournaments, only: [:index, :show, :edit, :update, :destroy]
+	resources :operators, only: [:index, :show, :edit, :update, :destroy]
 
 	get 'login', to: 'sessions#new'
 	delete 'logout', to: 'sessions#destroy'

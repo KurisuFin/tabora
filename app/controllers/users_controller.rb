@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+	before_action :ensure_that_user, except: [:index, :show]
 
   # GET /users
   # GET /users.json
@@ -70,5 +71,10 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username)
-    end
+		end
+
+		def ensure_that_user
+			raise_forbidden if current_user.nil?
+			raise_forbidden unless current_user.is(@user) or current_user.is_admin?
+		end
 end

@@ -1,4 +1,4 @@
-<%= form_for(@operator) do |f| %>
+<%= form_for(@operator, url: event_operators_path) do |f| %>
   <% if @operator.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@operator.errors.count, "error") %> prohibited this operator from being saved:</h2>
