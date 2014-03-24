@@ -70,6 +70,10 @@ class BattlesController < ApplicationController
 			act.save
 		end
 
+		unless battle.postbattles.empty?
+
+		end
+
 		redirect_to battle.tournament
 	end
 

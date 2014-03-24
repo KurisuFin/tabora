@@ -14,5 +14,23 @@
 				<% end %>
 			<% end %>
 		</ul>
+
+		<div>
+			<small>
+				<% if battle.prebattles.count > 0 %>
+					<strong>Prebattles:</strong>
+					<% battle.prebattles.each do |b| %>
+						<%= b.name %>
+					<% end %>
+				<% end %>
+				<br>
+				<% if battle.postbattles.count > 0 %>
+					<strong>Postbattles:</strong>
+					<% battle.postbattles.each do |b| %>
+						<%= b.name %>
+					<% end %>
+				<% end %>
+			</small>
+		</div>
 	</div>
 <% end %>

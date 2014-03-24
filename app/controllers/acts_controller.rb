@@ -40,7 +40,6 @@ class ActsController < ApplicationController
   # PATCH/PUT /acts/1
   # PATCH/PUT /acts/1.json
   def update
-		raise
     respond_to do |format|
       if @act.update(act_params)
         format.html { redirect_to @act, notice: 'Act was successfully updated.' }
