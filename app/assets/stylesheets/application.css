@@ -22,3 +22,16 @@ nav {
 	padding: 10px;
 	background: #FFD4D8;
 }
+
+.battle {
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.pending {
+	background: #EF2C2C;
+}
+
+.finished {
+	background: #C6D880;
+}

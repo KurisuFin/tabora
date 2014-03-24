@@ -2,6 +2,7 @@ class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :destroy]
 	before_action :ensure_that_operator, except: [:index, :show]
 
+
   # GET /tournaments
   # GET /tournaments.json
   def index
@@ -24,28 +25,28 @@ class TournamentsController < ApplicationController
   # GET /tournaments/new
   def new
     @tournament = Tournament.new
-		@event = Event.find(params[:event_id])
-		@games = Game.all
+		set_other_instance_variables
   end
 
   # GET /tournaments/1/edit
   def edit
 		@games = Game.all
+		@setups = Setup.all
   end
 
   # POST /tournaments
   # POST /tournaments.json
   def create
 		params[:tournament][:event_id] = params[:event_id]
-    @tournament = Tournament.new(tournament_params)
+		modify_name
+		@tournament = Tournament.new(tournament_params)
 
     respond_to do |format|
       if @tournament.save
         format.html { redirect_to @tournament, notice: 'Tournament was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tournament }
 			else
-				@event = Event.find(params[:event_id])
-				@games = Game.all
+				set_other_instance_variables
         format.html { render action: 'new' }
         format.json { render json: @tournament.errors, status: :unprocessable_entity }
       end
@@ -55,6 +56,8 @@ class TournamentsController < ApplicationController
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
+		modify_name
+
     respond_to do |format|
       if @tournament.update(tournament_params)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
@@ -82,9 +85,24 @@ class TournamentsController < ApplicationController
       @tournament = Tournament.find(params[:id])
     end
 
+		def set_other_instance_variables
+			@event = Event.find(params[:event_id])
+			@games = Game.all
+			@setups = Setup.all
+		end
+
+		def modify_name
+			name = params[:tournament][:name].strip
+			if name.length == 0
+				params[:tournament][:name] = nil
+			else
+				params[:tournament][:name] = name
+			end
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:name, :event_id, :game_id)
+      params.require(:tournament).permit(:name, :event_id, :game_id, :setup_id)
 		end
 
 		def ensure_that_operator

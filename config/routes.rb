@@ -1,4 +1,15 @@
 Tabora::Application.routes.draw do
+
+  resources :acts
+
+  resources :battles do
+		member do
+			patch 'set_winner', to: 'battles#set_winner'
+		end
+	end
+
+	resources :setups
+
   resources :participations
 
   resources :users
@@ -11,7 +22,7 @@ Tabora::Application.routes.draw do
 		resources :operators, only: [:new, :create]
 	end
 
-	resources :tournaments, only: [:index, :show, :edit, :update, :destroy]
+	resources :tournaments, only: [:index, :show, :edit, :update, :destroy, :operate]
 	resources :operators, only: [:index, :show, :edit, :update, :destroy]
 
 	get 'login', to: 'sessions#new'

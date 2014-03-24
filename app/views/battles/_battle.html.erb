@@ -1,0 +1,18 @@
+<% battles.each do |battle| %>
+	<div class="battle <%= battle.state %>">
+		<%= battle.name %>
+		<ul>
+			<% battle.acts.each do |act| %>
+				<%= form_for battle, url: set_winner_battle_path do |f| %>
+					<li>
+						<%= act.user.username %>
+						<%= act.score %>
+						<%= f.hidden_field :id, value: battle.id %>
+						<%= f.hidden_field :winner, value: act.id %>
+						<%= f.submit value: 'Win' %>
+					</li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

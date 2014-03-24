@@ -38,6 +38,11 @@
 	<% end %>
 </div>
 
+
+<%= render 'battles/battle', battles: @tournament.battles %>
+
+
+
 <% if current_user %>
 	<% if current_user.is_operator_of @tournament.event %>
 		<div id="controls">

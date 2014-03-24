@@ -8,6 +8,8 @@ OperatorsController
 Participation
 ParticipationsController
 SessionsController
+Setup
+SetupsController
 Tournament
 TournamentsController
 User

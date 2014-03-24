@@ -16,8 +16,13 @@
 </div>
 <div class="field">
 	<%= f.label :game_id %><br>
-	<%= f.select :game_id, options_from_collection_for_select(@games, :id, :name) %>
+	<%= f.select :game_id, options_from_collection_for_select(@games, :id, :name, selected: @tournament.game_id) %>
 </div>
+<div class="field">
+	<%= f.label :setup_id %><br>
+	<%= f.select :setup_id, options_from_collection_for_select(@setups, :id, :name, selected: @tournament.setup_id) %>
+</div>
+
 <div class="actions">
 	<%= f.submit %>
 </div>
