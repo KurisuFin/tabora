@@ -1,4 +1,8 @@
+Act
+ActsController
 ApplicationController
+Battle
+BattlesController
 Event
 EventsController
 Game

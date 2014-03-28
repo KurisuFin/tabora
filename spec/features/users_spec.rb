@@ -97,7 +97,5 @@ describe 'User' do
 
 			expect(page).to have_content 'Username has already been taken'
 		end
-
-		it 'can delete own account'
 	end
 end

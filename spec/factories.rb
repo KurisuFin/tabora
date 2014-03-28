@@ -27,4 +27,8 @@ FactoryGirl.define do
 		user
 		tournament
 	end
+
+	factory :battle do
+		tournament
+	end
 end
