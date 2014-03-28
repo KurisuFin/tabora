@@ -4,8 +4,6 @@ Tabora::Application.routes.draw do
 
   resources :battles
 
-	resources :setups
-
   resources :participations
 
   resources :users
