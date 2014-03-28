@@ -2,11 +2,7 @@ Tabora::Application.routes.draw do
 
   resources :acts
 
-  resources :battles do
-		member do
-			patch 'set_winner', to: 'battles#set_winner'
-		end
-	end
+  resources :battles
 
 	resources :setups
 
