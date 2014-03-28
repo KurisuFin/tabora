@@ -26,7 +26,7 @@ class ParticipationsController < ApplicationController
   # POST /participations
   # POST /participations.json
   def create
-    @participation = Participation.new(participation_params)
+		@participation = Participation.new(participation_params)
 		@participation.user_id = current_user.id
 
     respond_to do |format|
@@ -34,7 +34,7 @@ class ParticipationsController < ApplicationController
         format.html { redirect_to @participation.tournament, notice: 'Participation was successfully created.' }
         format.json { render action: 'show', status: :created, location: @participation }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to @participation.tournament }
         format.json { render json: @participation.errors, status: :unprocessable_entity }
       end
     end

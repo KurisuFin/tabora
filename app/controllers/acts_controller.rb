@@ -42,7 +42,7 @@ class ActsController < ApplicationController
   def update
     respond_to do |format|
       if @act.update(act_params)
-        format.html { redirect_to @act, notice: 'Act was successfully updated.' }
+        format.html { redirect_to @act.battle.tournament, notice: 'Act was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class ActsController < ApplicationController
   def destroy
     @act.destroy
     respond_to do |format|
-      format.html { redirect_to acts_url }
+      format.html { redirect_to @act.battle.tournament }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class ActsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def act_params
-      params.require(:act).permit(:user_id, :battle_id)
+      params.require(:act).permit(:user_id, :battle_id, :score)
     end
 end

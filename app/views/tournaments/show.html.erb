@@ -4,6 +4,11 @@
 <h1><%= @tournament.name %></h1>
 
 <p>
+	<strong>Phase:</strong>
+	<%= @tournament.phase %>
+</p>
+
+<p>
   <strong>Game:</strong>
   <%= @tournament.game.name %>
 </p>
@@ -24,7 +29,7 @@
 </table>
 
 <div>
-	<% if current_user %>
+	<% if current_user and @tournament.phase == 'enroll' %>
 		<% if current_user.is_participant_of(@tournament) %>
 			<%= form_for(@participation, method: :delete) do %>
 				<%= submit_tag 'Leave' %>
@@ -46,7 +51,7 @@
 <% if current_user %>
 	<% if current_user.is_operator_of @tournament.event %>
 		<div id="controls">
-			<%= render 'controls' %>
+			<%= render 'controls', tournament: @tournament %>
 		</div>
 	<% end %>
 <% end %>

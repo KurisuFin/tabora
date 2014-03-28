@@ -1,1 +1,14 @@
-<%= link_to 'Edit', edit_tournament_path(@tournament) %>
+<% if tournament.phase == 'enroll' %>
+	<%= form_for tournament, data: { confirm: 'Launch tournament?' } do |f| %>
+		<%= f.hidden_field :phase, value: 'ongoing' %>
+		<%= f.submit value: 'Launch tournament' %>
+	<% end %>
+<% end %>
+<% if tournament.phase == 'ongoing' %>
+	<%= form_for tournament, data: { confirm: 'End tournament?' } do |f| %>
+		<%= f.hidden_field :phase, value: 'ended' %>
+		<%= f.submit value: 'End tournament' %>
+	<% end %>
+<% end %>
+
+<%= link_to 'Edit', edit_tournament_path(tournament) %>

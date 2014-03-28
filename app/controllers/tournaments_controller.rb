@@ -12,7 +12,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
-		if current_user
+		if current_user and @tournament.phase == 'enroll'
 			if current_user.is_participant_of @tournament
 				@participation = Participation.find_by user: current_user, tournament: @tournament
 			else
@@ -56,7 +56,7 @@ class TournamentsController < ApplicationController
   # PATCH/PUT /tournaments/1
   # PATCH/PUT /tournaments/1.json
   def update
-		modify_name
+		modify_name unless params[:tournament][:name].nil?
 
     respond_to do |format|
       if @tournament.update(tournament_params)
@@ -102,7 +102,7 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:name, :event_id, :game_id, :setup_id)
+      params.require(:tournament).permit(:name, :event_id, :game_id, :setup_id, :phase)
 		end
 
 		def ensure_that_operator

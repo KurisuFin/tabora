@@ -1,19 +1,44 @@
 <% battles.each do |battle| %>
 	<div class="battle <%= battle.state %>">
 		<%= battle.name %>
+
 		<ul>
 			<% battle.acts.each do |act| %>
-				<%= form_for battle, url: set_winner_battle_path do |f| %>
-					<li>
+				<li>
+					<% unless act.user.nil? %>
 						<%= act.user.username %>
 						<%= act.score %>
-						<%= f.hidden_field :id, value: battle.id %>
-						<%= f.hidden_field :winner, value: act.id %>
-						<%= f.submit value: 'Win' %>
-					</li>
-				<% end %>
+						<% unless battle.finished? %>
+							<%= form_for act do |f| %>
+								<%= f.hidden_field :score, value: act.score_plus_one %>
+								<%= f.submit value: '+' %>
+							<% end %>
+							<%= form_for act, method: :delete, data: { confirm: 'Are you sure?' } do |f| %>
+								<%= f.submit value: 'Delete' %>
+							<% end %>
+						<% end %>
+					<% end %>
+				</li>
 			<% end %>
 		</ul>
+
+		<ul>
+			<% battle.get_unfinished_prebattles.each do |prebattle| %>
+				<li>
+					Winner of <%= prebattle.name %>
+				</li>
+			<% end %>
+		</ul>
+
+		<%= form_for battle do |f| %>
+			<% if battle.finished? %>
+				<%= f.hidden_field :state, value: 'pending' %>
+				<%= f.submit value: 'Unfinish' %>
+			<% else %>
+				<%= f.hidden_field :state, value: 'finished' %>
+				<%= f.submit value: 'Finish' %>
+			<% end %>
+		<% end %>
 
 		<div>
 			<small>

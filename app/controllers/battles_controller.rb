@@ -42,10 +42,10 @@ class BattlesController < ApplicationController
   def update
 		respond_to do |format|
       if @battle.update(battle_params)
-        format.html { redirect_to @battle, notice: 'Battle was successfully updated.' }
+        format.html { redirect_to @battle.tournament }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to @battle.tournament }
         format.json { render json: @battle.errors, status: :unprocessable_entity }
       end
     end
@@ -61,21 +61,6 @@ class BattlesController < ApplicationController
     end
   end
 
-	def set_winner
-		battle = Battle.find(params[:battle][:id])
-
-		battle.acts.each do |act|
-			act.score = 0
-			act.score = 1 if act.id == params[:battle][:winner].to_i
-			act.save
-		end
-
-		unless battle.postbattles.empty?
-
-		end
-
-		redirect_to battle.tournament
-	end
 
 	private
     # Use callbacks to share common setup or constraints between actions.
