@@ -17,13 +17,6 @@ class Tournament < ActiveRecord::Base
 		super || 'enroll'
 	end
 
-	# TODO: Make placement work
-	def placement_of(participant)
-		return '...' if self.phase != 'ended'
-
-		'Not implemented'
-	end
-
 
 	def update(tournament_params)
 		if super(tournament_params)

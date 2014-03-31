@@ -15,5 +15,16 @@
 	<%= @battle.tournament_id %>
 </p>
 
+<strong>Players:</strong>
+<ul>
+	<% @battle.acts.each do |act| %>
+		<li>
+			<%= link_to act.user.username, act.user %>
+			<small><%= link_to 'act', act %></small>
+		</li>
+	<% end %>
+</ul>
+
+
 <%= link_to 'Edit', edit_battle_path(@battle) %> |
 <%= link_to 'Back', battles_path %>

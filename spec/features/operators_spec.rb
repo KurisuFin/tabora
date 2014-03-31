@@ -38,6 +38,28 @@ describe 'Operator' do
 
 			expect(page).to have_content 'Name has already been taken'
 		end
+
+		it 'can add operator to event' do
+			FactoryGirl.create :user, username:'NewOperator'
+
+			visit new_event_operator_path(event)
+			select 'NewOperator', from:'operator_user_id'
+
+			expect {
+				click_button 'Create Operator'
+			}.to change{Operator.count}.from(1).to(2)
+
+			visit event_path(event)
+			expect(page).to have_content 'NewOperator'
+		end
+
+		it 'cannot add operator to another event' do
+			another = FactoryGirl.create :event
+
+			expect {
+				visit new_event_operator_path(another)
+			}.to raise_error ActionController::RoutingError
+		end
 	end
 
 

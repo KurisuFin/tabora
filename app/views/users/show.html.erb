@@ -2,25 +2,6 @@
 
 <h1><%= @user.username %></h1>
 
-<h2>Tournament history</h2>
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Placement</th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<% @user.tournaments.each do |tournament| %>
-			<tr>
-				<td><%= tournament.name %></td>
-				<td><%= tournament.placement_of(@user) %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
 
 <% if current_user %>
 	<% if current_user.is(@user) or current_user.is_admin? %>
