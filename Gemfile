@@ -19,6 +19,7 @@ group :production do
 end
 
 gem 'uuid', '~> 2.3.7'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -51,7 +52,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+
 
 # Use unicorn as the app server
 # gem 'unicorn'

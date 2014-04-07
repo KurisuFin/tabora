@@ -9,6 +9,8 @@ describe 'User' do
 		it 'can sign up with proper username' do
 			visit signup_path
 			fill_in 'user_username', with:'Tina'
+			fill_in 'user_password', with: 'mystery'
+			fill_in 'user_password_confirmation', with: 'mystery'
 
 			expect {
 				click_button 'Create User'
@@ -36,6 +38,7 @@ describe 'User' do
 		it 'can login' do
 			visit login_path
 			fill_in 'username', with:'Jack'
+			fill_in 'password', with:'secret'
 			click_button 'Login'
 
 			expect(page).to have_content 'Jack'
@@ -45,16 +48,17 @@ describe 'User' do
 		it 'cannot login with unexisting username' do
 			visit login_path
 			fill_in 'username', with:'BobTheBuilder'
+			fill_in 'password', with:'secret'
 			click_button 'Login'
 
-			expect(page).to have_content 'No such user'
+			expect(page).to have_content 'Username and/or password mismatch'
 		end
 	end
 
 
 	describe 'when logged in' do
 		before :each do
-			login username:'Jack'
+			login username:'Jack', password:'secret'
 		end
 
 		it 'can logout' do

@@ -12,7 +12,7 @@ describe 'User' do
 
 	describe 'when logged in' do
 		before :each do
-			login username:'Jack'
+			login username:'Jack', password:'secret'
 		end
 
 		it 'can join tournament' do

@@ -3,6 +3,8 @@ FactoryGirl.define do
 
 	factory :user do
 		username { uuid.generate }
+		password 'secret'
+		password_confirmation 'secret'
 	end
 
 	factory :event do

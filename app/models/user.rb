@@ -4,11 +4,12 @@ class User < ActiveRecord::Base
 	has_many :participations, dependent: :destroy
 	has_many :tournaments, through: :participations
 
+	has_secure_password
+
 	validates :username,
 						uniqueness: true,
 						length: { minimum: 3 }
 
-	#TODO Password things
 	def self.authenticate(username)
 		User.find_by username:username
 	end

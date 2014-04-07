@@ -1,30 +1,37 @@
 require 'spec_helper'
 
 describe User do
-	it 'is saved with proper name' do
-		user = User.create username:'Jack'
+	it 'is saved with proper name and password' do
+		user = User.create username:'Jack', password:'secret', password_confirmation:'secret'
 
 		expect(user).to be_valid
 		expect(User.count).to eq(1)
 	end
 
 	it 'is not saved if username is too short' do
-		user = User.create username:'Bo'
+		user = User.create username:'Bo', password:'secret', password_confirmation:'secret'
+
+		expect(user).not_to be_valid
+		expect(User.count).to eq(0)
+	end
+
+	it 'is not saved without password' do
+		user = User.create username:'Jack'
 
 		expect(user).not_to be_valid
 		expect(User.count).to eq(0)
 	end
 
 	it 'is not saved if username is already taken' do
-		user1 = User.create username:'Jack'
-		user2 = User.create username:'Jack'
+		user1 = User.create username:'Jack', password:'secret', password_confirmation:'secret'
+		user2 = User.create username:'Jack', password:'mystery', password_confirmation:'mystery'
 
 		expect(user2).not_to be_valid
 		expect(User.count).to eq(1)
 	end
 
 	it 'can be deleted' do
-		user = User.create username:'Jack'
+		user = User.create username:'Jack', password:'secret', password_confirmation:'secret'
 
 		expect {
 			user.delete

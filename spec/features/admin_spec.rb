@@ -5,7 +5,7 @@ describe 'Admin' do
 	let!(:user) { FactoryGirl.create :user, username:'admin', admin:true }
 
 	before :each do
-		login(username:'admin')
+		login username:'admin', password:'secret'
 	end
 
 

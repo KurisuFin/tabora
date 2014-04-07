@@ -7,7 +7,7 @@ describe 'Operator' do
 	let!(:operator) { FactoryGirl.create :operator, user:user, event:event }
 
 	before :each do
-		login(username:user.username)
+		login username:user.username, password:'secret'
 	end
 
 
