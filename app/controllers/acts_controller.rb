@@ -7,8 +7,7 @@ class ActsController < ApplicationController
 				format.html { redirect_to @act.battle.tournament, notice: 'Act was successfully updated.' }
 				format.json { head :no_content }
 			else
-				format.html { render action: 'edit' }
-				format.json { render json: @act.errors, status: :unprocessable_entity }
+				#TODO: Is this branch possible?
 			end
 		end
 	end
