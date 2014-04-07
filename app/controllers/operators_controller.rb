@@ -1,6 +1,6 @@
 class OperatorsController < ApplicationController
-  before_action :set_operator, only: [:destroy]
-	before_action :ensure_that_operator, except: [:index, :show, :create]
+  before_action :set_operator, only: [:show, :edit, :update, :destroy]
+	before_action :ensure_that_operator, except: [:index, :show]
 
   # GET /operators
   # GET /operators.json
@@ -17,6 +17,7 @@ class OperatorsController < ApplicationController
   def new
     @operator = Operator.new
 		@users = User.all
+		@events = Event.all
   end
 
   # GET /operators/1/edit
@@ -26,12 +27,11 @@ class OperatorsController < ApplicationController
   # POST /operators
   # POST /operators.json
   def create
-    params[:operator][:event_id] = params[:event_id]
-		@operator = Operator.new(operator_params)
+    @operator = Operator.new(operator_params)
 
     respond_to do |format|
       if @operator.save
-        format.html { redirect_to @operator.event, notice: 'Operator was successfully created.' }
+        format.html { redirect_to @operator, notice: 'Operator was successfully created.' }
         format.json { render action: 'show', status: :created, location: @operator }
 			else
 				@users = User.all

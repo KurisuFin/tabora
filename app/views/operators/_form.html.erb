@@ -15,9 +15,10 @@
     <%= f.label :user_id %><br>
     <%= f.select :user_id, options_from_collection_for_select(@users, :id, :username) %>
   </div>
-	<div class="field">
-		<%= f.hidden_field :event_id, value: :event_id %>
-	</div>
+  <div class="field">
+    <%= f.label :event_id %><br>
+    <%= f.select :event_id, options_from_collection_for_select(@events, :id, :name) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
