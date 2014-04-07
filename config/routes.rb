@@ -1,10 +1,10 @@
 Tabora::Application.routes.draw do
 
-  resources :acts
+  resources :acts, only: [:update, :destroy]
 
-  resources :battles
+  resources :battles, only: [:update, :destroy]
 
-  resources :participations
+  resources :participations, only: [:create, :destroy]
 
   resources :users
 	resources :sessions, only: [:new, :create]
