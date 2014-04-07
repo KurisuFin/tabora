@@ -2,15 +2,11 @@ class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :destroy]
 	before_action :ensure_that_operator, except: [:index, :show]
 
-
-  # GET /tournaments
-  # GET /tournaments.json
   def index
     @tournaments = Tournament.all
   end
 
-  # GET /tournaments/1
-  # GET /tournaments/1.json
+
   def show
 		if current_user and @tournament.phase == 'enroll'
 			if current_user.is_participant_of @tournament
@@ -22,20 +18,19 @@ class TournamentsController < ApplicationController
 		end
   end
 
-  # GET /tournaments/new
+
   def new
     @tournament = Tournament.new
 		@event = Event.find(params[:event_id])
 		@games = Game.all
   end
 
-  # GET /tournaments/1/edit
+
   def edit
 		@games = Game.all
   end
 
-  # POST /tournaments
-  # POST /tournaments.json
+
   def create
 		params[:tournament][:event_id] = params[:event_id]
 		modify_name
@@ -54,8 +49,7 @@ class TournamentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tournaments/1
-  # PATCH/PUT /tournaments/1.json
+
   def update
 		modify_name unless params[:tournament][:name].nil?
 
@@ -70,8 +64,7 @@ class TournamentsController < ApplicationController
     end
   end
 
-  # DELETE /tournaments/1
-  # DELETE /tournaments/1.json
+
   def destroy
     @tournament.destroy
     respond_to do |format|
@@ -81,10 +74,10 @@ class TournamentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_tournament
       @tournament = Tournament.find(params[:id])
     end
+
 
 		def modify_name
 			name = params[:tournament][:name].strip
@@ -95,7 +88,7 @@ class TournamentsController < ApplicationController
 			end
 		end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def tournament_params
       params.require(:tournament).permit(:name, :event_id, :game_id, :phase)
 		end
