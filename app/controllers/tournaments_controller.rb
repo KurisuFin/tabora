@@ -35,6 +35,7 @@ class TournamentsController < ApplicationController
 		params[:tournament][:event_id] = params[:event_id]
 		modify_name
 		@tournament = Tournament.new(tournament_params)
+		@tournament.phase = 'enroll'
 
     respond_to do |format|
       if @tournament.save

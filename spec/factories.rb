@@ -18,6 +18,7 @@ FactoryGirl.define do
 	factory :tournament do
 		event
 		game
+		phase 'enroll'
 	end
 
 	factory :operator do

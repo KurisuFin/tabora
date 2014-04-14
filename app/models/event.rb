@@ -6,4 +6,12 @@ class Event < ActiveRecord::Base
 	validates :name,
 						presence: true,
 						uniqueness: true
+
+	def has_enroll_tournaments?
+		Tournament.where(event:self, phase:'enroll').any?
+	end
+
+	def has_ongoing_tournaments?
+		Tournament.where(event:self, phase:'ongoing').any?
+	end
 end

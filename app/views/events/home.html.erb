@@ -1,0 +1,50 @@
+<h1>Tabora</h1>
+
+<h2>Ongoing tournaments</h2>
+
+<% @events.each do |event| %>
+	<% if event.has_ongoing_tournaments? %>
+		<table>
+			<thead>
+				<tr>
+					<th><%= link_to event.name, event %></th>
+				</tr>
+			</thead>
+
+			<tbody>
+			<% event.tournaments.each do |tournament| %>
+				<% if tournament.phase == 'ongoing' %>
+					<tr>
+						<td><%= link_to tournament.name, tournament %></td>
+					</tr>
+				<% end %>
+			<% end %>
+			</tbody>
+		</table>
+	<% end %>
+<% end %>
+
+
+<h2>Enroll tournaments</h2>
+
+<% @events.each do |event| %>
+	<% if event.has_enroll_tournaments? %>
+		<table>
+			<thead>
+			<tr>
+				<th><%= link_to event.name, event %></th>
+			</tr>
+			</thead>
+
+			<tbody>
+				<% event.tournaments.each do |tournament| %>
+					<% if tournament.phase == 'enroll' %>
+						<tr>
+							<td><%= link_to tournament.name, tournament %></td>
+						</tr>
+					<% end %>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+<% end %>

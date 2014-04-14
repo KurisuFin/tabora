@@ -20,5 +20,5 @@ Tabora::Application.routes.draw do
 	delete 'logout', to: 'sessions#destroy'
 	get 'signup', to: 'users#new'
 
-	root 'events#index'
+	root 'events#home'
 end

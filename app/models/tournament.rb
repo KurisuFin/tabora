@@ -13,10 +13,6 @@ class Tournament < ActiveRecord::Base
 		super || game.name
 	end
 
-	def phase
-		super || 'enroll'
-	end
-
 
 	def update(tournament_params)
 		if super(tournament_params)

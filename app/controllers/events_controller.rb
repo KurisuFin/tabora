@@ -1,7 +1,12 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-	before_action :ensure_that_admin, except: [:index, :show, :edit, :update]
+	before_action :ensure_that_admin, except: [:home, :index, :show, :edit, :update]
 	before_action :ensure_that_operator, only: [:edit, :update]
+
+	def home
+		@events = Event.all
+	end
+
 
   def index
     @events = Event.all
