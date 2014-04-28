@@ -10,9 +10,6 @@ class User < ActiveRecord::Base
 						uniqueness: true,
 						length: { minimum: 3 }
 
-	def self.authenticate(username)
-		User.find_by username:username
-	end
 
 	def is(user)
 		self == user

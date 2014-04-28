@@ -12,6 +12,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false
+	gem 'uuid', '~> 2.3.7'
 end
 
 group :production do
@@ -19,7 +20,6 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'uuid', '~> 2.3.7'
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'bootstrap-sass'
 
