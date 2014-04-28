@@ -4,6 +4,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
   gem 'rspec-rails', '~> 2.14.1'
+	gem 'rails_layout'
 end
 
 group :test do
@@ -20,6 +21,7 @@ end
 
 gem 'uuid', '~> 2.3.7'
 gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bootstrap-sass'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

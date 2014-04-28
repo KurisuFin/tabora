@@ -12,26 +12,18 @@
  *= require_tree .
  */
 
-nav {
-	padding: 10px;
-	background: #EFEFEF;
+.controls {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #111111;
+  margin-top: 60px;
+  padding: 10px;
 }
 
-#controls {
-	margin-top: 10px;
-	padding: 10px;
-	background: #FFD4D8;
+.controls#admin-tools {
+  background: #FFA4A8;
 }
 
-.battle {
-	margin-top: 10px;
-	padding: 10px;
-}
-
-.pending {
-	background: #EF2C2C;
-}
-
-.finished {
-	background: #C6D880;
+.controls#operator-tools {
+  background: #FFC4C8;
 }

@@ -1,6 +1,6 @@
 <h1>Listing events</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,9 +16,13 @@
   </tbody>
 </table>
 
-<br>
 <% if current_user %>
 	<% if current_user.is_admin? %>
-		<div id="controls"><%= link_to 'New Event', new_event_path %></div>
+		<div class="controls" id="admin-tools">
+			<strong>Admin tools:</strong>
+			<ul>
+				<li><%= link_to 'New Event', new_event_path %></li>
+			</ul>
+		</div>
 	<% end %>
 <% end %>

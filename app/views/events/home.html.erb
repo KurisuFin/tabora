@@ -4,19 +4,18 @@
 
 <% @events.each do |event| %>
 	<% if event.has_ongoing_tournaments? %>
-		<table>
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th><%= link_to event.name, event %></th>
+					<th>Participations</th>
 				</tr>
 			</thead>
 
 			<tbody>
 			<% event.tournaments.each do |tournament| %>
 				<% if tournament.phase == 'ongoing' %>
-					<tr>
-						<td><%= link_to tournament.name, tournament %></td>
-					</tr>
+					<%= render 'tournaments/row', tournament:tournament %>
 				<% end %>
 			<% end %>
 			</tbody>
@@ -29,19 +28,18 @@
 
 <% @events.each do |event| %>
 	<% if event.has_enroll_tournaments? %>
-		<table>
+		<table class="table table-hover">
 			<thead>
 			<tr>
 				<th><%= link_to event.name, event %></th>
+				<th>Participations</th>
 			</tr>
 			</thead>
 
 			<tbody>
 				<% event.tournaments.each do |tournament| %>
 					<% if tournament.phase == 'enroll' %>
-						<tr>
-							<td><%= link_to tournament.name, tournament %></td>
-						</tr>
+						<%= render 'tournaments/row', tournament: tournament %>
 					<% end %>
 				<% end %>
 			</tbody>

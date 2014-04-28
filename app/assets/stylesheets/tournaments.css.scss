@@ -1,3 +1,16 @@
 // Place all the styles related to the Tournaments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.battle {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.pending {
+  background: #ef544d;
+}
+
+.finished {
+  background: #C6D880;
+}

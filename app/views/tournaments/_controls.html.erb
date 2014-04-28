@@ -1,3 +1,9 @@
+<strong>Operator tools:</strong>
+
+<ul>
+	<li><%= link_to 'Edit', edit_tournament_path(tournament) %></li>
+</ul>
+
 <% if tournament.phase == 'enroll' %>
 	<%= form_for tournament, data: { confirm: 'Launch tournament?' } do |f| %>
 		<%= f.hidden_field :phase, value: 'ongoing' %>
@@ -10,5 +16,3 @@
 		<%= f.submit value: 'End tournament' %>
 	<% end %>
 <% end %>
-
-<%= link_to 'Edit', edit_tournament_path(tournament) %>

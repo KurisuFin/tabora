@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tabora</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<nav>
-	<strong><%= link_to 'HOME', root_path %></strong>
-	<%= link_to 'Events', events_path %>
-	<%= link_to 'Tournaments', tournaments_path %>
-	<%= link_to 'Games', games_path %>
-	|
-	<% if current_user.nil? %>
-		<%= link_to 'Sign up', '/signup' %>
-		<%= link_to 'Login', '/login' %>
-	<% else %>
-		<%= link_to current_user.username, current_user %>
-		<%= link_to 'Logout', '/logout', method: :delete %>
-	<% end %>
-</nav>
-
-<%= yield %>
-
-</body>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title><%= content_for?(:title) ? yield(:title) : "Tabora" %></title>
+		<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Tabora" %>">
+		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<header>
+			<%= render 'layouts/navigation' %>
+		</header>
+		<main role="main">
+			 <%= render 'layouts/messages' %>
+			 <%= yield %>
+		</main>
+	</body>
 </html>
