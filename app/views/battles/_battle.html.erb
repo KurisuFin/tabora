@@ -1,20 +1,22 @@
-<% battles.each do |battle| %>
+<% battles.order('created_at asc').each do |battle| %>
 	<div class="battle <%= battle.state %>">
 		<%= battle.name %>
 
 		<ul>
-			<% battle.acts.each do |act| %>
+			<% battle.acts.order('created_at asc').each do |act| %>
 				<li>
 					<% unless act.user.nil? %>
 						<%= act.user.username %>
 						<%= act.score %>
-						<% unless battle.finished? %>
-							<%= form_for act do |f| %>
-								<%= f.hidden_field :score, value: act.score_plus_one %>
-								<%= f.submit value: '+' %>
-							<% end %>
-							<%= form_for act, method: :delete, data: { confirm: 'Are you sure?' } do |f| %>
-								<%= f.submit value: 'Delete' %>
+						<% if current_user and current_user.is_operator_of(@tournament.event) %>
+							<% unless battle.finished? %>
+								<%= form_for act do |f| %>
+									<%= f.hidden_field :score, value: act.score_plus_one %>
+									<%= f.submit value: '+' %>
+								<% end %>
+								<%= form_for act, method: :delete, data: { confirm: 'Are you sure?' } do |f| %>
+									<%= f.submit value: 'Delete' %>
+								<% end %>
 							<% end %>
 						<% end %>
 					<% end %>
@@ -30,13 +32,15 @@
 			<% end %>
 		</ul>
 
-		<%= form_for battle do |f| %>
-			<% if battle.finished? %>
-				<%= f.hidden_field :state, value: 'pending' %>
-				<%= f.submit value: 'Unfinish' %>
-			<% else %>
-				<%= f.hidden_field :state, value: 'finished' %>
-				<%= f.submit value: 'Finish' %>
+		<% if current_user and current_user.is_operator_of(@tournament.event) %>
+			<%= form_for battle do |f| %>
+				<% if battle.finished? %>
+					<%= f.hidden_field :state, value: 'pending' %>
+					<%= f.submit value: 'Unfinish' %>
+				<% else %>
+					<%= f.hidden_field :state, value: 'finished' %>
+					<%= f.submit value: 'Finish' %>
+				<% end %>
 			<% end %>
 		<% end %>
 
