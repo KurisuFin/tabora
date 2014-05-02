@@ -1,5 +1,6 @@
 class BattlesController < ApplicationController
   before_action :set_battle, only: [:update, :destroy]
+	before_action :ensure_that_operator
 
   def update
 		respond_to do |format|
@@ -31,5 +32,12 @@ class BattlesController < ApplicationController
 
     def battle_params
       params.require(:battle).permit(:name, :state, :tournament_id)
-    end
+		end
+
+
+		def ensure_that_operator
+			raise_forbidden if current_user.nil?
+			battle = Battle.find(params[:id])
+			raise_forbidden unless current_user.is_operator_of battle.tournament.event
+		end
 end

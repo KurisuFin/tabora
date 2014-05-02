@@ -1,5 +1,6 @@
 class ActsController < ApplicationController
 	before_action :set_act, only: [:update, :destroy]
+	before_action :ensure_that_operator
 
 	def update
 		respond_to do |format|
@@ -30,5 +31,12 @@ class ActsController < ApplicationController
 
 		def act_params
 			params.require(:act).permit(:user_id, :battle_id, :score)
+		end
+
+
+		def ensure_that_operator
+			raise_forbidden if current_user.nil?
+			act = Act.find(params[:id])
+			raise_forbidden unless current_user.is_operator_of act.battle.tournament.event
 		end
 end
